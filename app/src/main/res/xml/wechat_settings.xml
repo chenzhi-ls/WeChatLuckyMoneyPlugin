@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="微信红包设置">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="设置发现红包后的事件"
+            android:entries="@array/wechat_mode_settings_title"
+            android:entryValues="@array/wechat_mode_settings_values"
+            android:key="KEY_WECHAT_MODE"
+            android:summary="@string/wx_mode_0"
+            android:title="抢红包模式"/>
+
+        <EditTextPreference
+            android:defaultValue="0"
+            android:dialogTitle="设置延迟时间(毫秒)"
+            android:hint="单位毫秒(1秒=1000毫秒)"
+            android:inputType="number"
+            android:key="KEY_WECHAT_DELAY_TIME"
+            android:title="设置延迟拆红包/查看手气时间"/>
+
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="设置打开红包后要执行的事件"
+            android:entries="@array/wechat_after_open_settings_titles"
+            android:entryValues="@array/wechat_after_open_settings_values"
+            android:key="KEY_WECHAT_AFTER_OPEN_HONGBAO"
+            android:summary="@string/after_open_hongbao"
+            android:title="打开红包后"/>
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/wechat_after_get_settings_titles"
+            android:entryValues="@array/wechat_after_get_settings_values"
+            android:key="KEY_WECHAT_AFTER_GET_HONGBAO"
+            android:summary="@string/after_get_none"
+            android:title="抢到红包后"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

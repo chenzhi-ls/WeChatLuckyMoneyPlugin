@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/notify_settings">
+        <com.mm.plugin.widget.CustomSwitchPreference
+            android:defaultValue="true"
+            android:key="KEY_NOTIFY_SOUND"
+            android:title="声音"/>
+
+        <com.mm.plugin.widget.CustomSwitchPreference
+            android:defaultValue="true"
+            android:key="KEY_NOTIFY_VIBRATE"
+            android:title="震动"/>
+
+        <com.mm.plugin.widget.CustomSwitchPreference
+            android:defaultValue="true"
+            android:key="KEY_NOTIFY_NIGHT_ENABLE"
+            android:summary="23:00-07:00"
+            android:title="夜间免打扰设置"/>
+
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="设置红包提醒声"
+            android:entries="@array/notify_sound_type_titles"
+            android:entryValues="@array/notify_sound_type_values"
+            android:key="KEY_NOTIFY_SOUND_TYPE"
+            android:title="设置红包提醒声"/>
+    </PreferenceCategory>
+</PreferenceScreen>

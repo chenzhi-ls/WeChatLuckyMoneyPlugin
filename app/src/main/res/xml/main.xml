@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="开启抢红包平台">
+
+        <com.mm.plugin.widget.CustomSwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/settings_ic_wechat"
+            android:key="KEY_ENABLE_WECHAT"
+            android:title="微信"/>
+
+    </PreferenceCategory>
+
+    <!--    <PreferenceCategory
+            android:title="关于">
+            <Preference
+                android:key="KEY_FOLLOW_ME"
+                android:summary="@string/follow_preference_summary"
+                android:title="@string/follow_preference_title"/>
+
+            <Preference
+                android:key="KEY_DONATE_ME"
+                android:summary="@string/donate_summary"
+                android:title="@string/donate_title"/>
+        </PreferenceCategory>-->
+
+    <PreferenceCategory
+        android:title="平台设置">
+
+        <Preference
+            android:key="WECHAT_SETTINGS"
+            android:summary="更改抢红包模式，可以防封号"
+            android:title="微信设置"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="高级设置">
+        <com.mm.plugin.widget.CustomSwitchPreference
+            android:defaultValue="false"
+            android:key="KEY_NOTIFICATION_SERVICE_TEMP_ENABLE"
+            android:summary="闪电模式，抢红包更快更稳定 部分机型锁屏后可以通过这个服务来监听微信消息事件"
+            android:title="快速监听通知栏"/>
+
+        <Preference
+            android:key="NOTIFY_SETTINGS"
+            android:summary="手机锁屏时的相关设置"
+            android:title="@string/notify_settings"/>
+
+        <Preference
+            android:key="RE_SETTINGS"
+            android:summary="@string/re_settings"
+            android:title="重置状态"/>
+    </PreferenceCategory>
+</PreferenceScreen>

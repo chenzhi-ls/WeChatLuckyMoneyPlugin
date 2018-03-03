@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        applicationId "com.woyao.mm.plugin"
+        minSdkVersion 16
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.4.0"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    signingConfigs {
+
+        codeboy {
+
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles 'proguard-android.txt'
+
+            android.applicationVariants.all { variant ->
+
+                variant.outputs.all {
+
+                    outputFileName = "luckymooneyplgin-v${defaultConfig.versionName}.apk"
+
+                }
+
+            }
+        }
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def keystore = properties.getProperty("KEY_STORE")
+        def storepasswd = properties.getProperty("KEY_STORE_PASSWORD")
+        def alias = properties.getProperty("KEY_ALIAS")
+        def aliaspasswd = properties.getProperty("KEY_ALIAS_PASSWORD")
+
+        if (keystore != null && storepasswd != null && alias != null && aliaspasswd != null) {
+            android.signingConfigs.debug.storeFile = file(keystore);
+            android.signingConfigs.debug.storePassword = storepasswd;
+            android.signingConfigs.debug.keyAlias = alias;
+            android.signingConfigs.debug.keyPassword = aliaspasswd;
+        }
+    }
+
+    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:24.2.1'
+}
