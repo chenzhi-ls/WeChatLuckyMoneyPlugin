@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;

@@ -76,6 +76,11 @@ public class WechatAccessibilityJob extends BaseAccessibilityJob {
     private int wx661VersionCode = 1220;
 
     /**
+     * 微信6.7.3版本的版本号
+     */
+    private int wx673VersionCode = 1360;
+
+    /**
      * 用来存储接收到的通知栏红包事件意图
      */
     private List<Notification> curHongbaoNotificationList = new ArrayList<>();
@@ -197,6 +202,16 @@ public class WechatAccessibilityJob extends BaseAccessibilityJob {
             wxHongbaoDetailsPageName = "com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyDetailUI";
             wxChatListListViewID = "com.tencent.mm:id/c3p";
             wxChatListItemLayoutID = "com.tencent.mm:id/apr";
+
+        } else if (curVersionCode == wx673VersionCode) {
+            wxChatListContentTxtID = "com.tencent.mm:id/azn";
+            wxChatListContentNumID = "com.tencent.mm:id/lu";
+            wxHongbaoPageOpenViewID = "com.tencent.mm:id/bx4";
+            wxHongbaoPageName = "com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyReceiveUI";
+            wxChatPageName = "com.tencent.mm.ui.LauncherUI";
+            wxHongbaoDetailsPageName = "com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyDetailUI";
+            wxChatListListViewID = "com.tencent.mm:id/cpj";
+            wxChatListItemLayoutID = "com.tencent.mm:id/azj";
 
         } else {
             // 暂不处理
@@ -322,7 +337,7 @@ public class WechatAccessibilityJob extends BaseAccessibilityJob {
         int wechatVersion = getWechatVersion();
         if (event == Config.WX_AFTER_OPEN_HONGBAO) { //拆红包
             // 通过遍历当前页面的节点树，获取到红包页面的“开”按钮
-            if (wechatVersion == wx523VersionCode || wechatVersion == wx661VersionCode) {
+            if (wechatVersion == wx523VersionCode || wechatVersion == wx661VersionCode || wechatVersion == wx673VersionCode) {
                 targetNode = AccessibilityHelper.findNodeInfosByClassName(nodeInfo, BUTTON_CLASS_NAME);
             } else {
                 Log.d(TAG, "抱歉，暂时不支持该微信版本！");
@@ -417,6 +432,14 @@ public class WechatAccessibilityJob extends BaseAccessibilityJob {
                                     AccessibilityHelper.performClick(textInfo.getParent());
                                     isGotoWxChatPage = true;
                                 }
+                            } else if (getWechatVersion() == wx673VersionCode) {
+                                if (numInfoList.size() > 0) {
+                                    // 是否存在未读消息 这条消息就是新的红包
+                                    // AccessibilityNodeInfo numInfo = numInfoList.get(0);
+                                    //最新的红包领起
+                                    AccessibilityHelper.performClick(textInfo.getParent());
+                                    isGotoWxChatPage = true;
+                                }
                             }
                         }
                     }
@@ -439,6 +462,9 @@ public class WechatAccessibilityJob extends BaseAccessibilityJob {
         if (mWechatPackageInfo == null) {
             return 0;
         }
+
+        Log.e(TAG, "wechat version:" + mWechatPackageInfo.versionCode);
+
         return mWechatPackageInfo.versionCode;
     }
 
